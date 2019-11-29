@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 32px;
+    }
+
+    .test {
+      width: 20rem;
+      height: 10rem;
+      background-color: bisque;
+      text-align: text；
+    }
+
+    .hello {
+      color: red;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="test">
+    <p class="hello">Hello jspang</p>
+  </div>
+
+  <script>
+    //得到手机屏幕的宽度
+    var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
+    //得到html的Dom元素 
+    var htmlDom = document.getElementsByTagName('html')[0];
+    //设置根元素字体大小
+    htmlDom.style.fontSize = htmlWidth / 20 + 'px';
+
+  </script>
+
+</body>
+
+</html>
