@@ -11,8 +11,8 @@ Vue.config.productionTip = false;
 // import 'vant/lib/vant-css/index.css'
 // Vue.use(vant)
 // 引入Vant的第2种方法   (按需使用Vant组件)
-import { Button } from 'vant'
-Vue.use(Button)
+import { Button,Row,Col } from 'vant'
+Vue.use(Button).use(Row).use(Col)
 
 
 /* eslint-disable no-new */
