@@ -61,6 +61,10 @@
     <swiper-default2></swiper-default2>
      <!-- swiper3 -->
     <swiper-default3 ></swiper-default3>
+    <!-- swiperTest -->
+    <swiper-test ></swiper-test>
+
+
   </div>
 </template>
 
@@ -70,6 +74,8 @@ import "swiper/dist/css/swiper.css";
 import swiperDefault from '../swiper/swiperDefault';
 import swiperDefault2 from '../swiper/swiperDefault2';
 import swiperDefault3 from '../swiper/swiperDefault3';
+import swiperTest from '../swiper/swiperTest';
+
 
 
 
@@ -110,7 +116,8 @@ export default {
    swiperSlide,
    swiperDefault,
    swiperDefault2,
-   swiperDefault3
+   swiperDefault3,
+   swiperTest
 
  }
 };

@@ -49,6 +49,6 @@ export default {
 .swiper{
   height: 7rem;
   border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ccc;
 }
 </style>

@@ -24,8 +24,12 @@ export default {
     return {
       slide: [1, 2, 3, 4, 5, 6],
       swiperOption: {
+        // 是否最后一屏的时候滚动回第一屏
+        loop:true,
         pagination: {
-          el: ".swiper-pagination"
+          el: ".swiper-pagination",
+          // 分页器是否可以点击自动选择
+          clickable:true
         }
       }
     };
