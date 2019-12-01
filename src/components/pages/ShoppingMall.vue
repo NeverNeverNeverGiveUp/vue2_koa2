@@ -45,39 +45,57 @@
       <div class="recommend-title">商品推荐</div>
       <div class="recommend-body">
         <swiper :options="swiperOptions">
-          <swiper-slide v-for="(item, index) in recommendGoods" :key="index+Math.random()">
+          <swiper-slide
+            v-for="(item, index) in recommendGoods"
+            :key="index + Math.random()"
+          >
             <div class="recommend-item">
-              <img v-lazy="item.image" width="80%">
-              <div>{{item.goodsName}}</div>
-              <div>¥{{item.price}}/¥{{item.mallPrice}}</div>
+              <img v-lazy="item.image" width="80%" />
+              <div>{{ item.goodsName }}</div>
+              <div>¥{{ item.price }}/¥{{ item.mallPrice }}</div>
             </div>
           </swiper-slide>
         </swiper>
       </div>
     </div>
     <!-- swiper -->
-    <swiper-default></swiper-default>
-     <!-- swiper2 -->
-    <swiper-default2></swiper-default2>
-     <!-- swiper3 -->
-    <swiper-default3 ></swiper-default3>
+    <!-- <swiper-default></swiper-default> -->
+    <!-- swiper2 -->
+    <!-- <swiper-default2></swiper-default2> -->
+    <!-- swiper3 -->
+    <!-- <swiper-default3 ></swiper-default3> -->
     <!-- swiperTest -->
-    <swiper-test ></swiper-test>
-
-
+    <!-- <swiper-test ></swiper-test> -->
+    <div class="floor">
+      <div class="floor-animaly">
+        <div class="floor-one">
+          <img :src="floor1_0.image" width="100%" />
+        </div>
+        <div>
+          <div class="floor-one">
+            <img :src="floor1_1.image" width="100%" />
+          </div>
+          <div class="floor-one">
+            <img :src="floor1_2.image" width="100%" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="floor_rule">
+      <div v-for="(item, index) in floor1.slice(3)" :key="index+ Math.random()" >
+        <img :src="item.image" alt="" srcset="" width="100%"/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import {swiper,swiperSlide} from "vue-awesome-swiper";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
-import swiperDefault from '../swiper/swiperDefault';
-import swiperDefault2 from '../swiper/swiperDefault2';
-import swiperDefault3 from '../swiper/swiperDefault3';
-import swiperTest from '../swiper/swiperTest';
-
-
-
+import swiperDefault from "../swiper/swiperDefault";
+import swiperDefault2 from "../swiper/swiperDefault2";
+import swiperDefault3 from "../swiper/swiperDefault3";
+import swiperTest from "../swiper/swiperTest";
 
 export default {
   data() {
@@ -87,11 +105,15 @@ export default {
       bannerPicArray: [],
       category: [],
       advertesPicture: "",
-      recommendGoods:[],
-      swiperOptions:{
+      recommendGoods: [],
+      swiperOptions: {
         // 每一屏显示几个
-        slidesPerView:3
-      }
+        slidesPerView: 3
+      },
+      floor1: [],
+      floor1_0: [],
+      floor1_1: [],
+      floor1_2: []
     };
   },
 
@@ -104,22 +126,25 @@ export default {
           this.category = res.data.data.category;
           this.advertesPicture = res.data.data.advertesPicture.PICTURE_ADDRESS;
           this.bannerPicArray = res.data.data.slides;
-          this.recommendGoods=res.data.data.recommend;
+          this.recommendGoods = res.data.data.recommend;
+          this.floor1 = res.data.data.floor1;
+          this.floor1_0 = res.data.data.floor1[0];
+          this.floor1_1 = res.data.data.floor1[1];
+          this.floor1_2 = res.data.data.floor1[2];
         }
       })
       .catch(error => {
         console.log(error);
       });
   },
- components:{
-   swiper,
-   swiperSlide,
-   swiperDefault,
-   swiperDefault2,
-   swiperDefault3,
-   swiperTest
-
- }
+  components: {
+    swiper,
+    swiperSlide,
+    swiperDefault,
+    swiperDefault2,
+    swiperDefault3,
+    swiperTest
+  }
 };
 </script>
 
@@ -167,24 +192,54 @@ export default {
   flex: 1;
 }
 
-.recommend-area{
+.recommend-area {
   background-color: #fff;
-  margin-top: .3rem;
-
+  margin-top: 0.3rem;
 }
-.recommend-title{
+.recommend-title {
   border-bottom: 1px solid #eee;
   font-size: 14px;
-  padding:.2rem;
+  padding: 0.2rem;
   color: #e5017d;
 }
-.recommend-body{
+.recommend-body {
   border-bottom: 1px solid #eee;
 }
-.recommend-item{
+.recommend-item {
   width: 99%;
   border-right: 1px solid #eee;
   font-size: 12px;
   text-align: center;
+}
+.floor-animaly {
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+.floor-animaly div {
+  width: 10rem;
+  box-sizing: border-box;
+}
+.floor-one {
+  border-right: 1px solid #ddd;
+}
+.floor-two {
+  border-bottom: 1px solid #ddd;
+}
+
+.floor_rule{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: #fff;
+}
+.floor_rule>div{
+  box-sizing: border-box;
+  width:10rem;
+  border-bottom: 1px solid #ddd;
+}
+.floor_rule div:nth-child(odd){
+  border-right: 1px solid #ddd;
 }
 </style>

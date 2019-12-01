@@ -141,7 +141,8 @@ export default {
         // false为固定滚动一屏，true为按照移动的像素滚动
         freeMode: true,
         // mousewheel是否可以通过鼠标滚动操作滚动
-        mousewheel: true
+        mousewheel: true,
+        
       }
     };
   },
