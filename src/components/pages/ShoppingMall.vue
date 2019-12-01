@@ -52,7 +52,7 @@
             <div class="recommend-item">
               <img v-lazy="item.image" width="80%" />
               <div>{{ item.goodsName }}</div>
-              <div>¥{{ item.price }}/¥{{ item.mallPrice }}</div>
+              <div>¥{{ item.price|moneyFilter }}/¥{{ item.mallPrice|moneyFilter }}</div>
             </div>
           </swiper-slide>
         </swiper>
@@ -66,36 +66,26 @@
     <!-- <swiper-default3 ></swiper-default3> -->
     <!-- swiperTest -->
     <!-- <swiper-test ></swiper-test> -->
-    <div class="floor">
-      <div class="floor-animaly">
-        <div class="floor-one">
-          <img :src="floor1_0.image" width="100%" />
-        </div>
-        <div>
-          <div class="floor-one">
-            <img :src="floor1_1.image" width="100%" />
-          </div>
-          <div class="floor-one">
-            <img :src="floor1_2.image" width="100%" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="floor_rule">
-      <div v-for="(item, index) in floor1.slice(3)" :key="index+ Math.random()" >
-        <img :src="item.image" alt="" srcset="" width="100%"/>
-      </div>
-    </div>
+    <floor-component :floorData="floor1" :floorTitle="floorName.floor1"></floor-component>
+     <floor-component :floorData="floor2" :floorTitle="floorName.floor2"></floor-component>
+    <floor-component :floorData="floor3" :floorTitle="floorName.floor3"></floor-component> 
+
+   
   </div>
 </template>
 
 <script>
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/dist/css/swiper.css";
-import swiperDefault from "../swiper/swiperDefault";
-import swiperDefault2 from "../swiper/swiperDefault2";
-import swiperDefault3 from "../swiper/swiperDefault3";
-import swiperTest from "../swiper/swiperTest";
+// import swiperDefault from "../swiper/swiperDefault";
+// import swiperDefault2 from "../swiper/swiperDefault2";
+// import swiperDefault3 from "../swiper/swiperDefault3";
+// import swiperTest from "../swiper/swiperTest";
+import floorComponent from "../component/floorComponent";
+
+// 引入数据加工
+import {toMoney} from '@/filter/moneyFilter.js'
+
 
 export default {
   data() {
@@ -110,13 +100,21 @@ export default {
         // 每一屏显示几个
         slidesPerView: 3
       },
-      floor1: [],
-      floor1_0: [],
-      floor1_1: [],
-      floor1_2: []
+      floor1: null,
+      floor2: null,
+      floor3: null,
+
+      floorName:{}
+      // floor1_0: [],
+      // floor1_1: [],
+      // floor1_2: []
     };
   },
-
+  filters: {
+    moneyFilter: function(money) {
+      return toMoney(money);
+    }
+  },
   created() {
     this.$axios
       .get("/48192/api/index")
@@ -128,9 +126,13 @@ export default {
           this.bannerPicArray = res.data.data.slides;
           this.recommendGoods = res.data.data.recommend;
           this.floor1 = res.data.data.floor1;
-          this.floor1_0 = res.data.data.floor1[0];
-          this.floor1_1 = res.data.data.floor1[1];
-          this.floor1_2 = res.data.data.floor1[2];
+          this.floor2 = res.data.data.floor2;
+          this.floor3 = res.data.data.floor3;
+
+          this.floorName=res.data.data.floorName;
+          // this.floor1_0 = res.data.data.floor1[0];
+          // this.floor1_1 = res.data.data.floor1[1];
+          // this.floor1_2 = res.data.data.floor1[2];
         }
       })
       .catch(error => {
@@ -140,10 +142,11 @@ export default {
   components: {
     swiper,
     swiperSlide,
-    swiperDefault,
-    swiperDefault2,
-    swiperDefault3,
-    swiperTest
+    // swiperDefault,
+    // swiperDefault2,
+    // swiperDefault3,
+    // swiperTest,
+    floorComponent
   }
 };
 </script>
@@ -211,35 +214,5 @@ export default {
   font-size: 12px;
   text-align: center;
 }
-.floor-animaly {
-  display: flex;
-  flex-direction: row;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
-}
-.floor-animaly div {
-  width: 10rem;
-  box-sizing: border-box;
-}
-.floor-one {
-  border-right: 1px solid #ddd;
-}
-.floor-two {
-  border-bottom: 1px solid #ddd;
-}
 
-.floor_rule{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  background-color: #fff;
-}
-.floor_rule>div{
-  box-sizing: border-box;
-  width:10rem;
-  border-bottom: 1px solid #ddd;
-}
-.floor_rule div:nth-child(odd){
-  border-right: 1px solid #ddd;
-}
 </style>
