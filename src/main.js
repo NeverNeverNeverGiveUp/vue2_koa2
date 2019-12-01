@@ -5,6 +5,11 @@ import App from './App'
 import router from './router'
 import Axios from 'axios'
 
+// 全局引入vue-awesome-swiper  【不推荐】
+// import VueAwesomeSwiper from "vue-awesome-swiper";
+// import "swiper/dist/css/swiper.css";
+
+// 解决axios跨域的问题
 Vue.prototype.$axios = Axios;
 Axios.defaults.baseURL = '/api';
 Axios.defaults.headers.post['Content-Type'] = 'application/json';
