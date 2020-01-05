@@ -4,4 +4,4 @@ const URL={
     getGoodsInfo:"getGoodsInfo"
 };
 
-export default URL;
+module.exports =URL;

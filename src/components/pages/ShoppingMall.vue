@@ -99,6 +99,8 @@ import "swiper/dist/css/swiper.css";
 import floorComponent from "../component/floorComponent";
 import goodsInfo from "../component/goodsInfoComponent";
 import url from "@/serviceAPI.config.js";
+console.log(url);
+
 debugger
 
 
