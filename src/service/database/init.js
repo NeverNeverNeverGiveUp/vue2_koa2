@@ -1,25 +1,59 @@
 const mongoose = require("mongoose");
 const db = "mongodb://localhost/myDB";
 var connect = () => {
-  // 链接数据库
-  mongoose.connect(db,{ useNewUrlParser:true, useUnifiedTopology:true });
-  // 增加数据库监听事件
-  mongoose.connection.on("disconnected", () => {
-    console.log("-----------------数据库断开----------------");
-    mongoose.connect(db,{ useNewUrlParser:true, useUnifiedTopology:true });
-  })
-  // 增加数据库监听事件
-  mongoose.connection.on("error", () => {
-    console.log("-----------------数据库错误----------------");
-    mongoose.connect(db,{ useNewUrlParser:true, useUnifiedTopology:true });
+
+  return new Promise((res, rej) => {
+    //   连接次数
+    let maxConnectTimes = 0;
+    // 链接数据库
+    mongoose.connect(db, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    // 增加数据库监听事件
+    mongoose.connection.on("disconnected", () => {
+      maxConnectTimes++;
+      if ( maxConnectTimes<= 3) {
+        console.log("-----------------数据库断开----------------",`第${maxConnectTimes}次重连接`);
+        mongoose.connect(db, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true
+        });
+      }else{
+          console.error("数据库出现问题，程序无法搞定，请认为修理");
+          rej();
+
+      }
+
+    })
+    // 增加数据库监听事件
+    mongoose.connection.on("error", (err) => {
+      maxConnectTimes++;
+      if ( maxConnectTimes<= 3) {
+        console.log("-----------------数据库错误----------------",`第${maxConnectTimes}次重连接`);
+        mongoose.connect(db, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true
+        });
+      }else{
+        console.error("数据库出现问题，程序无法搞定，请人为修理");
+        rej('err');
+          
+      }
+    })
+
+    // 链接打开的生活
+    mongoose.connection.once("open", () => {
+      console.log("-----------------mongoose数据库链接成功----------------");
+      res();
+    })
+
+
   })
 
-  // 链接打开的生活
-  mongoose.connection.on("open", () => {
-    console.log("-----------------mongoose数据库链接成功----------------");
-  })
+
 };
 
-module.exports={
-    connect
+module.exports = {
+  connect
 }
