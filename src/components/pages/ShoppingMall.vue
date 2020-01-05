@@ -69,7 +69,22 @@
     <floor-component :floorData="floor1" :floorTitle="floorName.floor1"></floor-component>
      <floor-component :floorData="floor2" :floorTitle="floorName.floor2"></floor-component>
     <floor-component :floorData="floor3" :floorTitle="floorName.floor3"></floor-component> 
+    <!--Hot Area-->
+        <div class="hot-area">
+            <div class="hot-title">热卖商品</div>
+            <div class="hot-goods">
+            <!--这里需要一个list组件-->
+                <van-list>
+                    <van-row gutter="20">
+                        <van-col span="12" v-for="(item , index) in hotGoods" :key="index">
+                                <goods-info :goodsId="item.goodsId" :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price">
 
+                                </goods-info>
+                        </van-col>
+                    </van-row>
+                </van-list>
+            </div>
+        </div>
    
   </div>
 </template>
@@ -82,6 +97,8 @@ import "swiper/dist/css/swiper.css";
 // import swiperDefault3 from "../swiper/swiperDefault3";
 // import swiperTest from "../swiper/swiperTest";
 import floorComponent from "../component/floorComponent";
+import goodsInfo from "../component/goodsInfoComponent";
+
 
 // 引入数据加工
 import {toMoney} from '@/filter/moneyFilter.js'
@@ -104,10 +121,11 @@ export default {
       floor2: null,
       floor3: null,
 
-      floorName:{}
+      floorName:{},
       // floor1_0: [],
       // floor1_1: [],
-      // floor1_2: []
+      // floor1_2: [],
+      hotGoods:[],  //热卖商品
     };
   },
   filters: {
@@ -133,6 +151,8 @@ export default {
           // this.floor1_0 = res.data.data.floor1[0];
           // this.floor1_1 = res.data.data.floor1[1];
           // this.floor1_2 = res.data.data.floor1[2];
+          this.hotGoods=res.data.data.hotGoods;
+
         }
       })
       .catch(error => {
@@ -146,7 +166,8 @@ export default {
     // swiperDefault2,
     // swiperDefault3,
     // swiperTest,
-    floorComponent
+    floorComponent,
+    goodsInfo
   }
 };
 </script>
@@ -214,5 +235,12 @@ export default {
   font-size: 12px;
   text-align: center;
 }
+
+ .hot-area{
+        text-align: center;
+        font-size:14px;
+        height: 1.8rem;
+        line-height:1.8rem;
+    }
 
 </style>

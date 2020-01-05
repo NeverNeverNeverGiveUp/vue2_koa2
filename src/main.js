@@ -22,8 +22,8 @@ Vue.config.productionTip = false;
 // import 'vant/lib/vant-css/index.css'
 // Vue.use(vant)
 // 引入Vant的第2种方法   (按需使用Vant组件)
-import { Button,Row,Col,Swipe,SwipeItem,Lazyload } from 'vant'
-Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload)
+import { Button,Row,Col,Swipe,SwipeItem,Lazyload,List } from 'vant'
+Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload).use(List)
 
 
 /* eslint-disable no-new */
