@@ -98,6 +98,9 @@ import "swiper/dist/css/swiper.css";
 // import swiperTest from "../swiper/swiperTest";
 import floorComponent from "../component/floorComponent";
 import goodsInfo from "../component/goodsInfoComponent";
+import url from "@/serviceAPI.config.js";
+debugger
+
 
 
 // 引入数据加工
