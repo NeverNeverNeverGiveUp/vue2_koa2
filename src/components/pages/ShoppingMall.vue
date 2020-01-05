@@ -71,7 +71,7 @@
     <floor-component :floorData="floor3" :floorTitle="floorName.floor3"></floor-component> 
     <!--Hot Area-->
         <div class="hot-area">
-            <div class="hot-title">热卖商品 </div>
+            <div class="hot-title">热卖商品</div>
             <div class="hot-goods">
             <!--这里需要一个list组件-->
                 <van-list>
