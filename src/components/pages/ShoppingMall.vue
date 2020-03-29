@@ -134,7 +134,7 @@ export default {
     };
   },
   filters: {
-    moneyFilter: function(money) {
+    moneyFilter: function (money) {
       return toMoney(money);
     }
   },

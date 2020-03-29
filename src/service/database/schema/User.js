@@ -5,7 +5,7 @@ let ObjectId = Schema.Types.ObjectId;
 const userSchema = new Schema({
   UserId: ObjectId,
   userName: {
-    unique: true,
+    unique: true,   //是否不能重复
     type: String
   },
   passWord: String,
@@ -20,4 +20,4 @@ const userSchema = new Schema({
 })
 
 // 发布模型
-mongoose.model("User",userSchema)
+mongoose.model("User",userSchema) 

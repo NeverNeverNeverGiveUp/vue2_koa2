@@ -1,7 +1,7 @@
 const Koa=require("koa");
 const app=new Koa();
 const {connect}=require("./../service/database/init")
-console.log("444",require("./../service/database/init"));
+// console.log("444",require("./../service/database/init"));
 
 
 

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const db = "mongodb://localhost/myDB";
+const db = "mongodb://localhost/smile-db";
 var connect = () => {
 
   return new Promise((res, rej) => {
@@ -10,18 +10,19 @@ var connect = () => {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
-    // 增加数据库监听事件
+    // 增加数据库监听事件：监听断开连接
     mongoose.connection.on("disconnected", () => {
+      // 监听断开连接
       maxConnectTimes++;
-      if ( maxConnectTimes<= 3) {
-        console.log("-----------------数据库断开----------------",`第${maxConnectTimes}次重连接`);
+      if (maxConnectTimes <= 3) {
+        console.log("-----------------数据库断开----------------", `第${maxConnectTimes}次重连接`);
         mongoose.connect(db, {
           useNewUrlParser: true,
           useUnifiedTopology: true
         });
-      }else{
-          console.error("数据库出现问题，程序无法搞定，请认为修理");
-          rej();
+      } else {
+        console.error("数据库出现问题，程序无法搞定，请人为修理");
+        rej();
 
       }
 
@@ -29,16 +30,16 @@ var connect = () => {
     // 增加数据库监听事件
     mongoose.connection.on("error", (err) => {
       maxConnectTimes++;
-      if ( maxConnectTimes<= 3) {
-        console.log("-----------------数据库错误----------------",`第${maxConnectTimes}次重连接`);
+      if (maxConnectTimes <= 3) {
+        console.log("-----------------数据库错误----------------", `第${maxConnectTimes}次重连接`);
         mongoose.connect(db, {
           useNewUrlParser: true,
           useUnifiedTopology: true
         });
-      }else{
+      } else {
         console.error("数据库出现问题，程序无法搞定，请人为修理");
         rej('err');
-          
+
       }
     })
 
